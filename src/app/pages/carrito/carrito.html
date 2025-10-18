@@ -1,0 +1,105 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4">🛒 Mi Carrito de Compras</h2>
+      
+      <!-- Carrito vacío -->
+      <div *ngIf="cartItems.length === 0" class="text-center py-5">
+        <i class="bi bi-cart-x" style="font-size: 4rem; color: #E91D62;"></i>
+        <h4 class="mt-3">Tu carrito está vacío</h4>
+        <p class="text-muted">Agrega algunos productos para continuar</p>
+        <a routerLink="/cuidadopersonal" class="btn" style="background-color: #E91D62; color: white;">
+          Comenzar a comprar
+        </a>
+      </div>
+
+      <!-- Lista de productos -->
+      <div *ngIf="cartItems.length > 0">
+        <div class="card shadow-sm">
+          <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Productos en el carrito</h5>
+              <button class="btn btn-outline-danger btn-sm" (click)="limpiarCarrito()">
+                <i class="bi bi-trash me-1"></i> Vaciar carrito
+              </button>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <!-- Productos -->
+            <div *ngFor="let item of cartItems" class="card mb-3">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <!-- Imagen -->
+                  <div class="col-md-2">
+                    <img [src]="item.ruta" 
+                         [alt]="item.nombre" 
+                         class="img-fluid rounded"
+                         style="max-height: 80px; object-fit: cover;"
+                         onerror="this.src='https://via.placeholder.com/80'">
+                  </div>
+                  
+                  <!-- Información del producto -->
+                  <div class="col-md-4">
+                    <h6 class="card-title mb-1">{{ item.nombre }}</h6>
+                    <p class="text-muted small mb-1">{{ item.presentacion }}</p>
+                    <p class="text-muted small mb-0" *ngIf="item.marca">Marca: {{ item.marca }}</p>
+                  </div>
+                  
+                  <!-- Cantidad -->
+                  <div class="col-md-3">
+                    <div class="d-flex align-items-center">
+                      <button class="btn btn-outline-secondary btn-sm" 
+                              (click)="disminuirCantidad(item)"
+                              [disabled]="item.cantidad <= 1">
+                        <i class="bi bi-dash"></i>
+                      </button>
+                      
+                      <span class="mx-3 fw-bold">{{ item.cantidad }}</span>
+                      
+                      <button class="btn btn-outline-secondary btn-sm" 
+                              (click)="aumentarCantidad(item)">
+                        <i class="bi bi-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <!-- Precio -->
+                  <div class="col-md-2 text-center">
+                    <span class="fw-bold text-primary">S/.{{ (item.precio * item.cantidad).toFixed(2) }}</span>
+                    <div class="text-muted small">S/.{{ item.precio.toFixed(2) }} c/u</div>
+                  </div>
+                  
+                  <!-- Eliminar -->
+                  <div class="col-md-1 text-end">
+                    <button class="btn btn-outline-danger btn-sm" 
+                            (click)="eliminarProducto(item.id_producto)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Total y acciones -->
+          <div class="card-footer bg-white">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <h5 class="mb-0">Total: <span class="text-primary">S/.{{ total.toFixed(2) }}</span></h5>
+              </div>
+              <div class="col-md-6 text-end">
+                <a routerLink="/cuidadopersonal" class="btn btn-outline-secondary me-2">
+                  <i class="bi bi-arrow-left me-1"></i> Seguir comprando
+                </a>
+                <button class="btn" style="background-color: #E91D62; color: white;">
+                  <i class="bi bi-credit-card me-1"></i> Proceder al pago
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

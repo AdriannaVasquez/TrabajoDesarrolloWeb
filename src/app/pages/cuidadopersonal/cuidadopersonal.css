@@ -1,0 +1,44 @@
+.producto-card {
+  border: 5px solid white;
+  border-radius: 20px;
+}
+
+.producto-img-container {
+  height: 300px;
+  padding: 0;
+}
+
+.producto-img {
+  max-height: 300px;
+  width: auto;
+  max-width: 90%;
+  object-fit: contain;
+}
+
+.card-title {
+  min-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.precio {
+  font-size: 1.8;
+  color: #000000;
+}
+
+.agregar-btn {
+  border: 2px solid #E91D62;
+  color: #E91D62;
+  font-weight: 600;
+  border-radius: 25px;
+  background-color: white;
+}
+
+.agregar-btn:hover {
+  background-color: #E91D62;
+  color: white;
+  transition: 0.3s;
+}
