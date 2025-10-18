@@ -1,7 +1,7 @@
-import { Component, signal, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CartService } from './services/cart';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +10,26 @@ import { CartService } from './services/cart';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  protected readonly title = signal('PaginaWeb');
-  cartItemCount = 0;
+  isLoggedIn: boolean = false;
+  userEmail: string = '';
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // Suscribirse a los cambios del carrito
-    this.cartService.cartCount$.subscribe(count => {
-      this.cartItemCount = count;
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.userEmail = localStorage.getItem('userEmail') || '';
+    
+    this.authService.isAuthenticated$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      this.userEmail = localStorage.getItem('userEmail') || '';
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/inicio']);
   }
 }

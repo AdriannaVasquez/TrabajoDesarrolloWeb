@@ -15,85 +15,59 @@
         Ver más <i class="bi ms-1"></i>
       </a>
     </div>
+
+    <div *ngIf="cargandoOfertas" class="text-center">
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Cargando ofertas...</span>
+      </div>
+    </div>
+<!-- Productos de oferta -->
     <div class="row justify-content-center">
-     
-      <!-- Producto 1 -->
-      <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+      <div class="col-xl-3 col-lg-4 col-md-6 mb-4" *ngFor="let producto of productosOferta">
         <div class="card h-100 border-5 shadow-lg oferta-card" style="border: 5px solid white; border-radius: 20px;">
           <div class="product-image-container bg-white py-4">
-            <img src="assets/producto5.webp" class="img-fluid" alt="Pañal" style="max-height: 300px;">
+            <img [src]="producto.ruta" 
+                 class="img-fluid" 
+                 [alt]="producto.nombre" 
+                 style="max-height: 300px;"
+                 onerror="this.src='https://via.placeholder.com/150'">
           </div>
           <div class="card-body text-center text-dark p-4">
             <div class="product-badge bg-warning text-dark small mb-3 d-inline-block px-3 py-1 rounded-pill">
-              66 Pañales
+              {{ producto.presentacion }}
             </div>
-            <h6 class="card-title fw-bold mb-3">Pañal Huggies Natural Care</h6>
+            <h6 class="card-title fw-bold mb-3">{{ producto.nombre }}</h6>
             <div class="price-section mb-4">
               <div class="d-flex flex-column align-items-center">
-                <span class="price-oferta fw-bold mb-1" style="font-size: 1.8em; color: #000000;">S/.61.50</span>
-                <div class="d-flex align-items-center">
-                  <span class="price-regular text-muted text-decoration-line-through me-2">S/.67.90</span>
+                <span *ngIf="producto.tiene_descuento && producto.precio_original" 
+                      class="price-oferta fw-bold mb-1" 
+                      style="font-size: 1.8em; color: #000000;">
+                  S/.{{ producto.precio.toFixed(2) }}
+                </span>
+                <div *ngIf="producto.tiene_descuento && producto.precio_original" 
+                     class="d-flex align-items-center gap-2 mt-1">
+                  <span class="price-regular text-muted text-decoration-line-through">
+                    S/.{{ producto.precio_original.toFixed(2) }}
+                  </span>
                 </div>
+                <span *ngIf="!producto.tiene_descuento" 
+                      class="price-oferta fw-bold mb-1" 
+                      style="font-size: 1.8em; color: #000000;">
+                  S/.{{ producto.precio.toFixed(2) }}
+                </span>
               </div>
             </div>
-            <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62; font-weight: 600; border-radius: 25px;">
+            <button class="btn agregar-btn w-100" 
+                    style="border-color: #E91D62; color: #E91D62; font-weight: 600; border-radius: 25px;"
+                    (click)="agregarAlCarrito(producto)">
               Agregar
             </button>
           </div>
         </div>
       </div>
-      
-      <!-- Producto 2 -->
-      <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-         <div class="card h-100 border-5 shadow-lg oferta-card" style="border: 5px solid white; border-radius: 20px;">
-          <div class="product-image-container bg-white py-4">
-            <img src="assets/producto6.webp" class="img-fluid" alt="Toalla" style="max-height: 300px;">
-          </div>
-          <div class="card-body text-center text-dark p-4">
-            <div class="product-badge bg-warning text-dark small mb-3 d-inline-block px-3 py-1 rounded-pill">
-              Bolsa 60 und
-            </div>
-            <h6 class="card-title fw-bold mb-3">Toallas Higiénicas</h6>
-            <div class="price-section mb-4">
-              <div class="d-flex flex-column align-items-center">
-                <span class="price-oferta fw-bold mb-1" style="font-size: 1.8em; color: #000000;">S/.17.90</span>
-                <div class="d-flex align-items-center">
-                  <span class="price-regular text-muted text-decoration-line-through me-2">S/.25.60</span>
-                </div>
-              </div>
-            </div>  
-            <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62; font-weight: 600; border-radius: 25px;">
-              Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 3 -->
-      <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-         <div class="card h-100 border-5 shadow-lg oferta-card" style="border: 5px solid white; border-radius: 20px;">
-          <div class="product-image-container bg-white py-4">
-            <img src="assets/producto7.webp" class="img-fluid" alt="Toalla" style="max-height: 300px;">
-          </div>
-          <div class="card-body text-center text-dark p-4">
-            <div class="product-badge bg-warning text-dark small mb-3 d-inline-block px-3 py-1 rounded-pill">
-              Tubo 2g
-            </div>
-            <h6 class="card-title fw-bold mb-3">Fotoprotector ISDIN </h6>
-            <div class="price-section mb-4">
-              <div class="d-flex flex-column align-items-center">
-                <span class="price-oferta fw-bold mb-1" style="font-size: 1.8em; color: #000000;">S/.79.92</span>
-                <div class="d-flex align-items-center">
-                  <span class="price-regular text-muted text-decoration-line-through me-2">S/.99.90</span>
-                </div>
-              </div>
-            </div>      
-            <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62; font-weight: 600; border-radius: 25px;">
-              Agregar
-            </button>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div *ngIf="!cargandoOfertas && productosOferta.length === 0" class="text-center">
+      <p class="text-white">No hay productos en oferta en este momento.</p>
     </div>
   </div>
 </div>
@@ -101,145 +75,114 @@
 <!-- Lo más vendido -->
 <div class="container my-5">
   <h2 class="text-left mb-4" style="color: #000000; font-weight: bold;">Lo más vendido</h2>
-  <div class="position-relative">
+  
+  <div class="position-relative carrusel-container">
+
+    <div *ngIf="mostrarMensaje" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+      <strong>¡Éxito!</strong> {{ mensajeExito }}
+      <button type="button" class="btn-close" (click)="mostrarMensaje = false"></button>
+    </div>
+    
+    <!-- Contenedor del carrusel -->
     <div class="products-scroll-container">
-      <div class="row flex-nowrap products-scroll" id="bestSellersScroll">
+      <div class="products-scroll">
         
-        <!-- Producto 1 -->
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card product-card h-100 border-0 shadow-sm mx-2">
+        <!-- Productos dinámicos -->
+        <div *ngFor="let producto of productos; let i = index" class="product-item">
+          <div class="card product-card h-100 border-0 shadow-sm">
             <div class="product-image-container">
-              <img src="assets/producto1.webp" class="card-img-top" alt="Fotoprotector Isdin Extrem SPF 50+">
+              <img [src]="producto.ruta || producto.imagen || producto.image || producto.url" 
+                   class="card-img-top" 
+                   [alt]="producto.nombre || producto.title || 'Producto'"
+                   onerror="this.src='https://via.placeholder.com/150?text=Img+' + (i + 1)">
             </div>
             <div class="card-body text-center">
-              <h6 class="card-title fw-bold">Panadol Antigripal</h6>
+              <h6 class="card-title fw-bold">
+                {{ producto.nombre || producto.title || producto.name || 'Producto ' + (i + 1) }}
+              </h6>
               <div class="price-section my-3">
-                <span class="price-new fw-bold" style="color: #000000; font-size: 1.2em;">S/2.60</span>
+                <span class="price-new fw-bold" style="color: #000000; font-size: 1.2em;">
+                  S/.{{ (producto.precio || producto.price || producto.valor || 0).toFixed(2) }}
+                </span>
               </div>
-              <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62;">
+              <button class="btn agregar-btn w-100" 
+                      (click)="agregarAlCarrito(producto)">
                 Agregar
               </button>
             </div>
           </div>
         </div>
-        
-        <!-- Producto 2 -->
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card product-card h-100 border-0 shadow-sm mx-2">
-            <div class="product-image-container">
-              <img src="assets/producto4.jpg" class="card-img-top" alt="Abril">
-            </div>
-            <div class="card-body text-center">
-              <h6 class="card-title fw-bold">Abrilar Jarabe</h6>
-              <div class="price-section my-3">
-                <span class="price-new fw-bold" style="color: #000000; font-size: 1.2em;">S/.24.00</span>
-              </div>
-              <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62;">
-                Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Producto 3 -->
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card product-card h-100 border-0 shadow-sm mx-2">
-            <div class="product-image-container">
-              <img src="assets/producto8.webp" class="card-img-top" alt="Multibiotico">
-            </div>
-            <div class="card-body text-center">
-              <h6 class="card-title fw-bold">Caramelos Multibioticos</h6>
-              <div class="price-section my-3">
-                <span class="price-new fw-bold" style="color: #000000; font-size: 1.2em;">S/.3.60</span>
-              </div>
-              <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62;">
-                Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Producto 4 -->
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card product-card h-100 border-0 shadow-sm mx-2">
-            <div class="product-image-container">
-              <img src="assets/producto9.webp" class="card-img-top" alt="Bismutol">
-            </div>
-            <div class="card-body text-center">
-              <h6 class="card-title fw-bold">Bismutol 262mg</h6>
-              <div class="price-section my-3">
-                <span class="price-new fw-bold" style="color: #000000; font-size: 1.2em;">S/.3.60</span>
-              </div>
-              <button class="btn agregar-btn w-100" style="border-color: #E91D62; color: #E91D62;">
-                Agregar
-              </button>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
     
-    <!-- Flechas de navegación -->
-    <button class="btn nav-btn prev-btn position-absolute top-50 start-0 translate-middle-y ms-0">
-      <i class="bi bi-chevron-left fs-4" style="color: #1F2B75;"></i>
+    <button *ngIf="productos.length > 3" 
+            class="btn nav-btn prev-btn position-absolute top-50 start-0 translate-middle-y"
+            (click)="scrollLeft()"
+            aria-label="Productos anteriores">
+      <i class="bi bi-chevron-left fs-4"></i>
     </button>
-    <button class="btn nav-btn next-btn position-absolute top-50 end-0 translate-middle-y">
-      <i class="bi bi-chevron-right fs-4" style="color: #1F2B75;"></i>
+    
+    <button *ngIf="productos.length > 3" 
+            class="btn nav-btn next-btn position-absolute top-50 end-0 translate-middle-y"
+            (click)="scrollRight()"
+            aria-label="Siguientes productos">
+      <i class="bi bi-chevron-right fs-4"></i>
     </button>
   </div>
 </div>
 
-    <!-- Footer -->
-    <div class="b-example-divider"></div>
-    <div class="container-fluid footer-custom">
-      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5">        
-        <div class="col mb-3">
-          <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
-          <img src="assets/logo.png" alt="Logo" width="400">
-            <svg class="bi me-2" width="40" height="180" aria-hidden="true">
-              <use xlink:href="#bootstrap"></use>
-            </svg>
-          </a>
-        </div>
-        <div class="col mb-3"></div>
-        <div class="col mb-3">
-          <h5 class='fw-bold'>Servicio al cliente</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">Mi cuenta</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">Estado de mi pedido</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="/productos" class="nav-link p-0 text-white">Categorías</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">Libro de reclamaciones</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col mb-3">
-          <h5 class='fw-bold'>Políticas Botica SAC</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">Tratamiento de datos personales</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">Políticas de privacidad</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col mb-3">
-         <h5 class='fw-bold'>Datos de contacto</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">Acerca de nosotros</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 text-white">info@boticasac.com</a>
-            </li>
-          </ul>
-        </div>
-      </footer>
+<!-- Footer -->
+<div class="b-example-divider"></div>
+<div class="container-fluid footer-custom">
+  <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5">        
+    <div class="col mb-3">
+      <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+        <img src="assets/logo.png" alt="Logo" width="400">
+        <svg class="bi me-2" width="40" height="180" aria-hidden="true">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
     </div>
+    <div class="col mb-3"></div>
+    <div class="col mb-3">
+      <h5 class='fw-bold'>Servicio al cliente</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a href="/login" class="nav-link p-0 text-white">Mi cuenta</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="/carrito" class="nav-link p-0 text-white">Estado de mi pedido</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="/productos" class="nav-link p-0 text-white">Categorías</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="/libroreclamaciones" class="nav-link p-0 text-white">Libro de reclamaciones</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col mb-3">
+      <h5 class='fw-bold'>Políticas Botica SAC</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a href="/politica-datos" class="nav-link p-0 text-white">Tratamiento de datos personales</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="/politica-privacidad" class="nav-link p-0 text-white">Políticas de privacidad</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col mb-3">
+      <h5 class='fw-bold'>Datos de contacto</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-white">Acerca de nosotros</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-white">info@boticasac.com</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</div>

@@ -1,13 +1,12 @@
 <div class="container-fluid my-4">
   <div class="row">
-    
+
     <!-- Sidebar de filtros -->
     <div class="col-md-3">
-      <button class="btn btn-outline-primary w-100 mb-3" (click)="borrarFiltros()">
-        Borrar Filtros
-      </button>
+      <button class="btn btn-outline-primary w-100 mb-3" (click)="borrarFiltros()">Borrar Filtros</button>
 
       <div class="accordion" id="filtros">
+        
         <!-- Marca -->
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -18,17 +17,10 @@
           <div id="filtroMarca" class="accordion-collapse collapse" data-bs-parent="#filtros">
             <div class="accordion-body">
               <div *ngFor="let marca of marcas" class="mb-2">
-                <input 
-                  type="radio" 
-                  name="marca" 
-                  [value]="marca"
-                  [checked]="marcaSeleccionada === marca"
-                  (change)="marcaSeleccionada = marca; aplicarFiltros()">
+                <input type="radio" name="marca" [value]="marca" [checked]="marcaSeleccionada === marca" (change)="marcaSeleccionada = marca; aplicarFiltros()">
                 {{ marca }}
               </div>
-              <div *ngIf="marcas.length === 0" class="text-muted small">
-                No hay marcas disponibles
-              </div>
+              <div *ngIf="marcas.length === 0" class="text-muted small">No hay marcas disponibles</div>
             </div>
           </div>
         </div>
@@ -43,31 +35,13 @@
           <div id="filtroPrecio" class="accordion-collapse collapse" data-bs-parent="#filtros">
             <div class="accordion-body">
               <div>
-                <input 
-                  type="radio" 
-                  name="precio" 
-                  value="20-50"
-                  [checked]="rangoPrecioSeleccionado === '20-50'"
-                  (change)="rangoPrecioSeleccionado = '20-50'; aplicarFiltros()">
-                20 - 50 
+                <input type="radio" name="precio" value="20-50" [checked]="rangoPrecioSeleccionado === '20-50'" (change)="rangoPrecioSeleccionado='20-50'; aplicarFiltros()"> 20 - 50
               </div>
               <div>
-                <input 
-                  type="radio" 
-                  name="precio" 
-                  value="51-100"
-                  [checked]="rangoPrecioSeleccionado === '51-100'"
-                  (change)="rangoPrecioSeleccionado = '51-100'; aplicarFiltros()">
-                51 - 100 
+                <input type="radio" name="precio" value="51-100" [checked]="rangoPrecioSeleccionado === '51-100'" (change)="rangoPrecioSeleccionado='51-100'; aplicarFiltros()"> 51 - 100
               </div>
               <div>
-                <input 
-                  type="radio" 
-                  name="precio" 
-                  value="101-150"
-                  [checked]="rangoPrecioSeleccionado === '101-150'"
-                  (change)="rangoPrecioSeleccionado = '101-150'; aplicarFiltros()">
-                101 - 150 
+                <input type="radio" name="precio" value="101-150" [checked]="rangoPrecioSeleccionado === '101-150'" (change)="rangoPrecioSeleccionado='101-150'; aplicarFiltros()"> 101 - 150
               </div>
             </div>
           </div>
@@ -83,35 +57,22 @@
         </div>
       </div>
 
-      <div *ngIf="error" class="alert alert-danger">
-        {{ error }}
-      </div>
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-6 mb-4" *ngFor="let producto of productosFiltrados">
           <div class="card h-100 shadow-lg producto-card">
             <div class="d-flex justify-content-center align-items-center bg-white producto-img-container">
-              <img [src]="producto.ruta" 
-                   class="img-fluid producto-img" 
-                   [alt]="producto.nombre"
-                   onerror="this.src='https://via.placeholder.com/150'">
-            </div>      
+              <img [src]="producto.ruta" class="img-fluid producto-img" [alt]="producto.nombre" onerror="this.src='https://via.placeholder.com/150'">
+            </div>
             <div class="card-body text-center text-dark d-flex flex-column">
-              <div class="bg-warning text-dark small mb-3 d-inline-block px-3 py-1 rounded-pill">
-                {{ producto.presentacion }}
-              </div>
-              <h6 class="card-title fw-bold mb-3">
-                {{ producto.nombre }}
-              </h6>              
+              <div class="bg-warning text-dark small mb-3 d-inline-block px-3 py-1 rounded-pill">{{ producto.presentacion }}</div>
+              <h6 class="card-title fw-bold mb-3">{{ producto.nombre }}</h6>
               <div class="mt-auto">
                 <div class="mb-3">
-                  <span class="fw-bold d-block precio">
-                    S/.{{ producto.precio.toFixed(2) }}
-                  </span>
-                </div>  
-               <button class="btn agregar-btn w-100" (click)="agregarAlCarrito(producto)">
-                Agregar
-              </button>
+                  <span class="fw-bold d-block precio">S/.{{ producto.precio.toFixed(2) }}</span>
+                </div>
+                <button class="btn agregar-btn w-100" (click)="agregarAlCarrito(producto)">Agregar</button>
               </div>
             </div>
           </div>
@@ -121,6 +82,60 @@
       <div *ngIf="!cargando && productosFiltrados.length === 0" class="text-center">
         <p class="text-muted">No se encontraron productos con los filtros aplicados.</p>
       </div>
+    </div>
+<!-- Footer -->
+    <div class="b-example-divider"></div>
+    <div class="container-fluid footer-custom">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5">        
+        <div class="col mb-3">
+          <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+          <img src="assets/logo.png" alt="Logo" width="400">
+            <svg class="bi me-2" width="40" height="180" aria-hidden="true">
+              <use xlink:href="#bootstrap"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+          <h5 class='fw-bold'>Servicio al cliente</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="/login" class="nav-link p-0 text-white">Mi cuenta</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/carrito" class="nav-link p-0 text-white">Estado de mi pedido</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/productos" class="nav-link p-0 text-white">Categorías</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/libroreclamaciones" class="nav-link p-0 text-white">Libro de reclamaciones</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h5 class='fw-bold'>Políticas Botica SAC</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="/politica-datos" class="nav-link p-0 text-white">Tratamiento de datos personales</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/politica-privacidad" class="nav-link p-0 text-white">Políticas de privacidad</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+         <h5 class='fw-bold'>Datos de contacto</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-white">Acerca de nosotros</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-white">info@boticasac.com</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
     </div>
   </div>
 </div>

@@ -1,37 +1,66 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card border-0 shadow">
-                <div class="card-body p-5">
-                    <h1 class="h3 text-center fw-bold mb-3">Iniciar sesión</h1>
-                    <div class="text-center mb-3">
-                        <a href="#" class="text-decoration-none h6 text-primary">Registrarme</a>
-                    </div>
-                    <p class="text-muted text-center mb-4">Ingresa tu correo para continuar</p>    
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label text-muted">Correo electrónico</label>
-                            <input type="email" class="form-control" placeholder="ejemplo@correo.com">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Ingresa tu contraseña</label>
-                            <input type="password" class="form-control" placeholder="••••••••">
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label fw-bold">Recuerdame</label>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <a href="#" class="text-decoration-none fw-bold">¿Olvidaste tu contraseña?</a>
-                        </div>
-                        
-                        <hr>
-                        <button class="btn btn-dark w-100 fw-bold py-2">Ingresar</button>
-                    </form>
+<div class="login-body">
+    <div class="container">
+        <ul class="nav nav-pills nav-justified mb-3" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" routerLink="/login">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" routerLink="/registro">Registrarme</a>
+            </li>
+        </ul>
+
+        <!-- Contenido Login -->
+        <form (submit)="onSubmit($event)">
+            <div class="form-group">
+                <strong>Ingresa tu correo para continuar</strong>
+                <input 
+                    type="email" 
+                    [(ngModel)]="email"
+                    name="email" 
+                    required 
+                    placeholder="Correo electrónico"
+                    [disabled]="isLoading">
+            </div>
+            
+            <div class="form-group">
+                <strong>Ingresa tu contraseña</strong>
+                <input 
+                    type="password" 
+                    [(ngModel)]="password"
+                    name="password" 
+                    required 
+                    placeholder="Contraseña"
+                    [disabled]="isLoading">
+            </div>
+            
+            <div class="options-group">
+                <div class="checkbox-group">
+                    <input 
+                        type="checkbox" 
+                        [(ngModel)]="rememberMe"
+                        name="rememberMe"
+                        [disabled]="isLoading">
+                    <label>Recuérdame</label>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" (click)="onForgotPassword($event)">¿Olvidaste tu contraseña?</a>
                 </div>
             </div>
+            
+            <button 
+                type="submit" 
+                class="btn btn-primary"
+                [disabled]="isLoading">
+                {{ isLoading ? 'Cargando...' : 'Ingresar' }}
+            </button>
+        </form>
+        
+        <div 
+            *ngIf="message" 
+            [class]="'message ' + messageType">
+            {{ message }}
         </div>
     </div>
 </div>
+

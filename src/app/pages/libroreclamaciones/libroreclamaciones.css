@@ -1,0 +1,357 @@
+.reclamaciones-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Corporativo */
+.corporate-header {
+  background: linear-gradient(135deg, #1a237e, #283593);
+  color: white;
+  padding: 20px 0;
+  border-bottom: 4px solid #e91d62;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.company-logo {
+  font-size: 3em;
+}
+
+.company-info h1 {
+  margin: 0;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.company-tagline {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+  font-size: 0.9em;
+}
+
+.header-contact {
+  text-align: right;
+}
+
+.header-contact p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+/* Título de Página */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.page-title h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: #1a237e;
+  font-weight: 300;
+}
+
+.page-subtitle {
+  margin: 10px 0 0 0;
+  color: #666;
+  font-size: 1.1em;
+}
+
+.compliance-badge .badge {
+  background: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+/* Información Corporativa */
+.corporate-info {
+  padding: 40px 20px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+  font-size: 2.5em;
+  color: #1a237e;
+}
+
+.card-content h3 {
+  margin: 0 0 15px 0;
+  color: #1a237e;
+  font-size: 1.3em;
+}
+
+.card-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-content li {
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.card-content li:last-child {
+  border-bottom: none;
+}
+
+.card-content strong {
+  color: #333;
+}
+
+/* Sección de Procedimiento */
+.procedure-section {
+  padding: 60px 20px;
+  background: #f8f9fa;
+}
+
+.section-title {
+  text-align: center;
+  color: #1a237e;
+  font-size: 2em;
+  margin-bottom: 50px;
+  font-weight: 300;
+}
+
+.procedure-steps {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.step-number {
+  background: #1a237e;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  margin: 0 0 15px 0;
+  color: #1a237e;
+  font-size: 1.4em;
+}
+
+.step-content p {
+  margin: 0;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* Comunicaciones */
+.communications-section {
+  padding: 60px 20px;
+}
+
+.communications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.comm-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-top: 4px solid #1a237e;
+  transition: transform 0.3s ease;
+}
+
+.comm-card:hover {
+  transform: translateY(-5px);
+}
+
+.comm-icon {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.comm-card h3 {
+  color: #1a237e;
+  margin: 0 0 15px 0;
+  font-size: 1.3em;
+}
+
+.comm-card p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Compromisos */
+.commitments-section {
+  padding: 60px 20px;
+  background: #f8f9fa;
+}
+
+.commitments-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.commitment-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1.1em;
+}
+
+.commitment-item:last-child {
+  border-bottom: none;
+}
+
+.checkmark {
+  color: #4caf50;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+/* Footer Corporativo */
+.corporate-footer {
+  background: #1a237e;
+  color: white;
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.footer-section h4 {
+  margin: 0 0 15px 0;
+  color: #e91d62;
+  font-size: 1.2em;
+}
+
+.footer-section p {
+  margin: 5px 0;
+  opacity: 0.9;
+}
+
+.footer-bottom {
+  background: #0d1b6b;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #283593;
+}
+
+.footer-bottom p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .step-number {
+    align-self: center;
+  }
+  
+  .communications-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}

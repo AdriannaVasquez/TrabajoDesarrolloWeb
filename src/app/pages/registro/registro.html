@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+    <div class="container">
+        <ul class="nav nav-pills nav-justified mb-3" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="/login" id="tab-login">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" href="/registro" id="tab-register">Registrarme</a>
+            </li>
+        </ul>
+
+        <!-- Contenido Registro -->
+        <form id="registerForm">
+            <div class="form-group">
+                <strong>Nombre completo</strong>
+                <input type="text" id="register-nombre" name="nombre" required placeholder="Tu nombre completo">
+            </div>
+            
+            <div class="form-group">
+                <strong>Correo electrónico</strong>
+                <input type="email" id="register-email" name="email" required placeholder="Correo electrónico">
+            </div>
+            
+            <div class="form-group">
+                <strong>Contraseña</strong>
+                <input type="password" id="register-password" name="password" required placeholder="Contraseña" minlength="6">
+            </div>
+            
+            <div class="form-group">
+                <strong>Confirmar contraseña</strong>
+                <input type="password" id="register-confirm-password" name="confirm_password" required placeholder="Repite tu contraseña">
+            </div>
+            
+            <div class="options-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="register-terms">
+                    <label for="register-terms">Acepto los términos y condiciones</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+        </form>
+        
+        <div id="register-message" class="message"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://c6vix0f64k.execute-api.us-east-1.amazonaws.com/v1/registro';
+
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('register-nombre').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value.trim();
+            const confirmPassword = document.getElementById('register-confirm-password').value.trim();
+            const terms = document.getElementById('register-terms').checked;
+            const messageDiv = document.getElementById('register-message');
+
+            if (!terms) {
+                showMessage('Debes aceptar los términos y condiciones.', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showMessage('Las contraseñas no coinciden.', 'error');
+                return;
+            }
+
+            const data = {
+                nombre: nombre,
+                email: email,
+                password: password,
+                confirm_password: confirmPassword
+};
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showMessage('✅ Registro exitoso. Redirigiendo...', 'success');
+                    setTimeout(() => window.location.href = 'login.html', 2000);
+                } else {
+                    showMessage(result.message || '❌ Error al registrar usuario.', 'error');
+                }
+            } catch (error) {
+                showMessage('⚠️ Error de conexión con el servidor.', 'error');
+                console.error(error);
+            }
+        });
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('register-message');
+            messageDiv.textContent = message;
+            messageDiv.style.color = type === 'success' ? 'green' : 'red';
+        }
+    </script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../services/cart';
 
 interface Producto {
   id_producto: number;
@@ -11,6 +10,7 @@ interface Producto {
   ruta: string;
   presentacion: string;
   marca: string;
+  cantidad?: number;
 }
 
 @Component({
@@ -29,30 +29,14 @@ export class Cuidadopersonal implements OnInit {
 
   private apiUrl = 'https://c6vix0f64k.execute-api.us-east-1.amazonaws.com/v1/categorias';
 
-  constructor(
-    private http: HttpClient,
-    private cartService: CartService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.cargarProductos();
   }
 
-  agregarAlCarrito(producto: Producto) {
-    this.cartService.addToCart(producto);
-    
-    // Opcional: Mostrar mensaje de confirmación
-    this.mostrarMensajeExito(`${producto.nombre} agregado al carrito`);
-  }
-
-  private mostrarMensajeExito(mensaje: string) {
-    // Puedes usar toast notifications aquí
-    console.log('✅', mensaje);
-  }
-
   cargarProductos() {
     this.cargando = true;
-
     this.http.get<any>(this.apiUrl).subscribe({
       next: (data) => {
         this.cargando = false;
@@ -74,9 +58,7 @@ export class Cuidadopersonal implements OnInit {
   cargarMarcas() {
     const marcasSet = new Set<string>();
     this.productosCategoria2.forEach((producto) => {
-      if (producto.marca) {
-        marcasSet.add(producto.marca);
-      }
+      if (producto.marca) marcasSet.add(producto.marca);
     });
     this.marcas = Array.from(marcasSet).sort();
   }
@@ -109,5 +91,19 @@ export class Cuidadopersonal implements OnInit {
     this.marcaSeleccionada = '';
     this.rangoPrecioSeleccionado = '';
     this.productosFiltrados = [...this.productosCategoria2];
+  }
+
+  agregarAlCarrito(producto: Producto) {
+    const carrito: Producto[] = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+    const index = carrito.findIndex(p => p.id_producto === producto.id_producto);
+    if (index !== -1) {
+      carrito[index].cantidad = (carrito[index].cantidad || 1) + 1;
+    } else {
+      carrito.push({ ...producto, cantidad: 1 });
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    alert(`${producto.nombre} agregado al carrito`);
   }
 }

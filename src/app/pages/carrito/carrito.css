@@ -1,0 +1,353 @@
+.carrito-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.carrito-container h2 {
+  text-align: center;
+  color: #1F2B75;
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.carrito-vacio {
+  text-align: center;
+  padding: 60px 40px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(31, 43, 117, 0.1);
+  border: 2px dashed #E91D62;
+}
+
+.carrito-vacio p {
+  font-size: 1.3em;
+  margin-bottom: 25px;
+  color: #1F2B75;
+  font-weight: 500;
+}
+
+.btn-seguir-comprando {
+  background-color: #E91D62;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-seguir-comprando:hover {
+  background-color: #c2185b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(233, 29, 98, 0.3);
+}
+
+.lista-carrito {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(31, 43, 117, 0.1);
+  overflow: hidden;
+}
+
+.item-carrito {
+  display: grid;
+  grid-template-columns: 100px 1.5fr 140px 120px 100px;
+  align-items: center;
+  gap: 25px;
+  padding: 20px 30px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease;
+}
+
+.item-carrito:hover {
+  background-color: #f8f9fa;
+}
+
+.item-carrito:last-child {
+  border-bottom: none;
+}
+
+.item-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-imagen img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  margin-left: 80px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 120px;
+}
+
+.item-info h4 {
+  margin: 0 0 8px 0;
+  color: #1F2B75;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.precio-unitario {
+  margin: 0;
+  color: #E91D62;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.item-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f8f9fa;
+  padding: 8px 15px;
+  border-radius: 25px;
+  justify-content: center;
+  border: 1px solid #e0e0e0;
+}
+
+.btn-cantidad {
+  background-color: #1F2B75;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.btn-cantidad:hover {
+  background-color: #E91D62;
+  transform: scale(1.1);
+}
+
+.item-cantidad span {
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  color: #1F2B75;
+}
+
+/* Subtotal */
+.item-subtotal {
+  font-weight: bold;
+  color: #1F2B75;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+/* Botón Eliminar */
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+/* Sección Total */
+.carrito-total {
+  padding: 25px 30px;
+  background-color: #1F2B75;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 3px solid #E91D62;
+}
+
+.total-info p {
+  margin: 0 0 5px 0;
+  font-size: 1.4em;
+  color: white;
+  font-weight: bold;
+}
+
+.total-info small {
+  color: #b8c2cc;
+  font-size: 0.9em;
+}
+
+.acciones-total {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-comprar {
+  background-color: #E91D62;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-comprar:hover {
+  background-color: #c2185b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(233, 29, 98, 0.3);
+}
+
+/* Badge para cantidad */
+.cantidad-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #E91D62;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .item-carrito {
+    grid-template-columns: 80px 1fr 120px 100px 90px;
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carrito-container {
+    padding: 20px 15px;
+  }
+  
+  .carrito-container h2 {
+    font-size: 1.8em;
+  }
+
+  .item-carrito {
+    grid-template-columns: 70px 1fr;
+    grid-template-areas: 
+      "imagen info"
+      "cantidad subtotal"
+      "acciones acciones";
+    gap: 15px;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .item-imagen {
+    grid-area: imagen;
+    position: relative;
+  }
+
+  .item-imagen img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .item-info {
+    grid-area: info;
+  }
+
+  .item-info h4 {
+    font-size: 1em;
+  }
+
+  .item-cantidad {
+    grid-area: cantidad;
+    justify-content: start;
+    width: fit-content;
+  }
+
+  .item-subtotal {
+    grid-area: subtotal;
+    text-align: right;
+    align-self: center;
+    font-size: 1.1em;
+  }
+
+  .item-acciones {
+    grid-area: acciones;
+    justify-self: end;
+  }
+
+  .carrito-total {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .acciones-total {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-seguir-comprando,
+  .btn-comprar {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrito-container h2 {
+    font-size: 1.6em;
+  }
+  
+  .item-carrito {
+    padding: 15px;
+    gap: 12px;
+  }
+  
+  .item-info h4 {
+    font-size: 0.95em;
+  }
+  
+  .precio-unitario {
+    font-size: 0.9em;
+  }
+  
+  .carrito-vacio {
+    padding: 40px 20px;
+  }
+  
+  .carrito-vacio p {
+    font-size: 1.1em;
+  }
+}
